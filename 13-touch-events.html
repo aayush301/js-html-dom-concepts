@@ -1,0 +1,65 @@
+<!-- Note: Run this file on mobile devices -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Touch events</title>
+</head>
+<body>
+	
+	<div>Hello</div>
+	<div id="d"></div>
+	
+	<script>
+		ele = document.querySelector("#d");
+		
+		window.addEventListener("touchstart", (e)=>{
+			e.preventDefault();
+			ele.innerHTML += " Touchstart";
+			console.log(e.touches);
+		}, {passive: false})
+		
+		window.addEventListener("touchmove", (e)=>{
+			e.preventDefault();
+			ele.innerHTML += " Touchmove";
+			console.log(e.touches);
+		}, {passive: false})
+		
+		window.addEventListener("touchend", (e)=>{
+			e.preventDefault();
+			ele.innerHTML += " Touchend";
+			console.log(e.touches);
+		}, {passive: false})
+		
+		
+		// swipe
+		let startingX, startingY, movingX, movingY,dist=40;
+		window.addEventListener("touchstart", (e)=>{
+			e.preventDefault();
+			startingX = e.touches[0].clientX;
+			startingY = e.touches[0].clientY;
+		}, {passive: false})
+		
+		window.addEventListener("touchmove", (e)=>{
+			e.preventDefault();
+			movingX = e.touches[0].clientX;
+			movingY = e.touches[0].clientY;
+		}, {passive: false})
+		
+		window.addEventListener("touchend", (e)=>{
+			e.preventDefault();
+			if(movingX - startingX > dist)
+				ele.innerHTML += " Swiperight"
+			else if(movingX - startingX < -dist)
+				ele.innerHTML += " Swipeleft"
+			if(movingY - startingY > dist)
+				ele.innerHTML += " Swipedown"
+			else if(movingY - startingY < -dist)
+				ele.innerHTML += " Swipeup"
+		}, {passive: false})
+		
+	</script>
+</body>
+</html>

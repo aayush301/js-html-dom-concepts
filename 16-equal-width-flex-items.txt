@@ -1,0 +1,4 @@
+Set flex:1 to each flex item for equal width flex items.
+But still, the flex items may not get equal widths.
+The reason is the padding which may be present for a flex item.
+Solution: Wrap the children of that flex item in another div and move the padding to that child div of the flex item.
